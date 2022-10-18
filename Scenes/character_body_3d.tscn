@@ -10,6 +10,7 @@
 script = ExtResource("1_abdlg")
 head_path = NodePath("Head")
 flass_light_path = NodePath("Head/SpotLight3D")
+heard_ray_cast_path = NodePath("HeadRayCast")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_8xfjh")
@@ -28,3 +29,7 @@ visible = false
 shadow_enabled = true
 spot_range = 75.1102
 spot_angle = 23.0979
+
+[node name="HeadRayCast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18229, 0)
+target_position = Vector3(0, 1, 0)
