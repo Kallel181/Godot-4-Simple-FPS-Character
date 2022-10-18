@@ -12,8 +12,8 @@ const crouch_height:float = 0.70
 @export var mouse_sensitivity:float = 0.1
 @export var lerp_move_weight:float = 0.2
 @export var jump_height:float = 2.0
-@export var walk_speed: float = 5.0
-@export var crouch_speed: float = 2.0
+@export var walk_move_speed: float = 5.0
+@export var crouch_move_speed: float = 2.0
 
 #==========Nodes==========
 #Variaveis do tipo NodePath precisam ser inicializadas pela interface da engine
@@ -38,7 +38,7 @@ func _ready() -> void:
 #==========pProcess==========
 func _physics_process(delta) -> void:
 	apply_gravity(delta)
-	move_player()
+	move_player(delta)
 
 #==========Input==========
 func _input(event) -> void:
@@ -61,8 +61,7 @@ func camera(event):
 		head.rotation.x = clamp(head.rotation.x,deg_to_rad(-90),deg_to_rad(90))
 
 
-func move_player():
-	print(scale.y)
+func move_player(delta):
 	#Controle do pulo
 	#Note que a função is_on_floor detecta se estamos pisando no chão, similarmente godot tambem apresenta
 	#is_on_ceiling() e is_on_wall() sem a necessidade de tags ou grupos
@@ -71,12 +70,13 @@ func move_player():
 	
 	
 	#Controle da velocidade caso apertarmos ctrl, ou seja, player esta agachado
-	speed = walk_speed
+	speed = walk_move_speed
 	if not heard_ray_cast.is_colliding():
-		scale.y = default_height
+		scale.y = lerp(scale.y,default_height,0.1)
 	if Input.is_action_pressed("ctrl"):
-		speed = crouch_speed
-		scale.y = crouch_height
+		speed = crouch_move_speed
+		scale.y = lerp(scale.y,crouch_height-0.3,0.1)
+	print(scale.y)
 	
 	
 	#h_rot armazena o valor da rotação em relação ao eixo y
