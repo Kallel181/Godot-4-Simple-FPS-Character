@@ -76,7 +76,6 @@ func move_player(delta):
 	if Input.is_action_pressed("ctrl"):
 		speed = crouch_move_speed
 		scale.y = lerp(scale.y,crouch_height-0.3,0.1)
-	print(scale.y)
 	
 	
 	#h_rot armazena o valor da rotação em relação ao eixo y
