@@ -1,4 +1,4 @@
 # Teste_FPS
-Godot 4 simples FPS character
+Godot 4 simple FPS character
 
 Using Godot 4 Beta 3
